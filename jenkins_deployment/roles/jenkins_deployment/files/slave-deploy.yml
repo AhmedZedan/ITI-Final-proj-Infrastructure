@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-ubuntu-slave
+  namespace: jenkins
+  labels:
+    app: jenkins-ubuntu-slave
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-ubuntu-slave
+  template:
+    metadata:
+      labels:
+        app: jenkins-ubuntu-slave
+    spec:
+      containers:
+      - name: jenkins-ubuntu-slave
+        image: ahmedzedan/jenkins-slave:v1
+        imagePullPolicy: Always
+        resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+        ports:
+        - containerPort: 22
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock

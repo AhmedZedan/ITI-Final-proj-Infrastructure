@@ -1,0 +1,5 @@
+file_permission:
+  - {
+      path: "jenkins-deployment/kubectl.sh",
+      mode: "0755"
+    }

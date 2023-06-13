@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jenkins
+  name: jenkins
+  namespace: jenkins
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      securityContext:
+        fsGroup: 1000 
+        runAsUser: 0
+      containers:
+      - name: jenkins            
+        image: jenkins/jenkins:lts-jdk11
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50000
+          protocol: TCP
+        resources:
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+            requests:
+              memory: "500Mi"
+              cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /login
+            port: 8080
+            scheme: HTTP
+          periodSeconds: 10
+          failureThreshold: 5
+          successThreshold: 2
+          timeoutSeconds: 5
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/run
+          name: docker-sock
+        - name: data-disk
+          mountPath: /var/jenkins_home
+        - name: docker
+          subPath: "docker"
+          mountPath: "/usr/local/bin/docker"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run
+          type: ""
+      - name: data-disk
+        persistentVolumeClaim:
+          claimName: claim-jenkins
+      - name: docker
+        emptyDir: {}

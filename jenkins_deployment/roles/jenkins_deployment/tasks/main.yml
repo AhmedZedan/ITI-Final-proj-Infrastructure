@@ -1,0 +1,22 @@
+- name: Create directory
+  ansible.builtin.file:
+    path: jenkins-deployment
+    state: directory
+
+- name: Copy jenkins files
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/"
+    dest: jenkins-deployment
+
+- name: Edit file permission
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ file_permission }}"
+
+- name: Deploy jenkins and jenkins slave
+  ansible.builtin.shell: "./kubectl.sh"
+  become: false
+  args:
+    chdir: "jenkins-deployment"
+

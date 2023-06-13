@@ -1,0 +1,6 @@
+- name: palybook_for_bastion
+  hosts: bastion
+  roles:
+    - bastion_config
+    - jenkins_deployment
+  
