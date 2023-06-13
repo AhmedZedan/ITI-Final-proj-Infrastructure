@@ -51,9 +51,6 @@ spec:
           name: docker-sock
         - name: data-disk
           mountPath: /var/jenkins_home
-        - name: docker
-          subPath: "docker"
-          mountPath: "/usr/local/bin/docker"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -66,5 +63,3 @@ spec:
       - name: data-disk
         persistentVolumeClaim:
           claimName: claim-jenkins
-      - name: docker
-        emptyDir: {}
