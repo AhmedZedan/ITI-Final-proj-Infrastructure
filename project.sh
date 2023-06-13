@@ -1,8 +1,8 @@
 cd eks_infra
 terraform init
-terraform apply
+terraform apply -auto-approve
 
-if [ $? -nq 0 ]
+if [ $? -ne 0 ]
 then
     echo "Failed to build the infrastructure!"
     exit
