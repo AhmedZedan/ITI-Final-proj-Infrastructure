@@ -4,8 +4,7 @@ terraform apply -auto-approve
 
 if [ $? -ne 0 ]
 then
-    echo "Failed to build the infrastructure!"
-    exit
+  echo "Failed to build the infrastructure!"
 else
   echo "Infrastructure has built successfully"
 fi
@@ -26,6 +25,8 @@ cat > jenkins_deployment/inventory <<-EOF
 [bastion]
 $bastion_public_ip
 EOF
+
+sleep 10
 
 echo "Starting jenkins deployment"
 

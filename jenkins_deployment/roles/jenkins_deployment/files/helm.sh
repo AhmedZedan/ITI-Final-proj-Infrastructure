@@ -1,0 +1,1 @@
+helm install my-jenkins jenkins-deployment-Helm

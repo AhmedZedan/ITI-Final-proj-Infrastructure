@@ -1,5 +1,5 @@
 file_permission:
   - {
-      path: "jenkins-deployment/kubectl.sh",
+      path: "jenkins-deployment/helm.sh",
       mode: "0755"
     }

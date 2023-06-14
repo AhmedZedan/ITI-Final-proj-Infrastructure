@@ -4,7 +4,7 @@ metadata:
   labels:
     app: jenkins
   name: jenkins
-  namespace: jenkins
+  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   revisionHistoryLimit: 10

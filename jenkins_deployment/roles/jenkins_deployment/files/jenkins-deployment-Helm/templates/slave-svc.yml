@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: jenkins-ubuntu-slave-svc
-  namespace: jenkins
+  namespace: {{ .Values.namespace }}
 spec:
   selector:
     app: jenkins-ubuntu-slave

@@ -15,7 +15,7 @@
   loop: "{{ file_permission }}"
 
 - name: Deploy jenkins and jenkins slave
-  ansible.builtin.shell: "./kubectl.sh"
+  ansible.builtin.shell: "./helm.sh"
   become: false
   args:
     chdir: "jenkins-deployment"

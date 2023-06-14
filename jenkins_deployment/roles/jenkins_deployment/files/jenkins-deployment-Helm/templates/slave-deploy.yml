@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jenkins-ubuntu-slave
-  namespace: jenkins
+  namespace: {{ .Values.namespace }}
   labels:
     app: jenkins-ubuntu-slave
 spec:
