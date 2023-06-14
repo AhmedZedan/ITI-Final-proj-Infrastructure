@@ -84,9 +84,9 @@ After our ansible code done we can check what it did with this command
 $ kubectl get all -n jenkins
 ```
 
-* **when you see jenkins-service you will find its type is LoadBalancer and have an EXTERNAL IP you will find it as a url**
-- something like this ```ae5429bea1f44900ce551770-63270.us-east-1.elb.amazonaws.com```
-* **you can access your jenkins server with this url and the port 8080**
-- ```ae5429bea1f44900ce551770-63270.us-east-1.elb.amazonaws.com:8080```
+* when you see jenkins-service you will find its type is **LoadBalancer** and have an **EXTERNAL IP** you will find it as a url
+  - something like this ```ae5429bea1f44900ce551770-63270.us-east-1.elb.amazonaws.com```
+* you can access your jenkins server with this url and the **port 8080**
+  - ```ae5429bea1f44900ce551770-63270.us-east-1.elb.amazonaws.com:8080```
 
-* **when you put this in your browser congratulation you are now on your jenkins interface and you can do your pipeline with the configuration you want.**
+* when you put this in your browser congratulation you are now on your jenkins interface and you can do your pipeline with the configuration you want.
